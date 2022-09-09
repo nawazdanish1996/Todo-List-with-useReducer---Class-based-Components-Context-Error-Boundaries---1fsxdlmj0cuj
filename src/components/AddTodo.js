@@ -11,14 +11,18 @@ const AddTodo = ({ dispatch }) => {
         <>
             {todos.map((todo)=>(
                 <div key={todo.id}>
-                    <label>
+                    <form id="todo-form">
                         <input
+                        id="todo-input"
                         type="checkbox"
                         checked={todo.complete}
                         onChange={() => handleComplete(todo)}
                         />
-                        {todo.title}
-                    </label>
+                        <button type="submit">Button</button>
+                        <button type="reset">Reset</button>
+                        <h1 id="todo-input">{todo.title}</h1>
+
+                    </form>
                 </div>
             ))}</>
     )

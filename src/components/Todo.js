@@ -4,10 +4,10 @@ import { AddTodo } from './AddTodo';
 
 const Todo = () => {
     return (
-        <>
+        <div className='todo-list'>
             <todoReducer />
-            <AddTodo />
-        </>
+            <AddTodo className="todo" />
+        </div>
     )
 }
 
