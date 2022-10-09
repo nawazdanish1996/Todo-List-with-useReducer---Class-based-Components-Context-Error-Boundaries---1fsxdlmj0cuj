@@ -1,15 +1,16 @@
 const todoReducer = (state, action) => {
     switch (action.type) {
-        case "COMPLETE":
-            return state.map((todo)=>{
-                if (todo.id === action.id){
-                    return {...todo, complete: !todo.complete};
-                }else{
-                    return todo;
-                }
-            });
-            default:
+        case"ADD":
+        return [...state,action.payload];
+        return state;
+
+        case"DELETE" :
+        return state.filter((item)=>{
+            if(item.id!=action.payload.id){
                 return state;
+            }
+        });
+        default:return state;
     }
 }
 
