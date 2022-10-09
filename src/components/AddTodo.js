@@ -1,30 +1,36 @@
-import React from "react";
+import React,{useState} from "react";
+
 
 const AddTodo = ({ dispatch }) => {
-    const [todos, dispatch] = useReducer(reducer, initialTodos);
 
-    const handleComplete = (todo)=>{
-        dispatch({type: "COMPLETED", id: todo.id});
-    };
+    const [taskArr,setTaskArr] =useState([]);
+    const [inputVal,setVal] = useState("");
+    const [DateId,setId] = useState( new Date().getTime().toString());
+
+    function submitHandler (e) {
+        e.preventDefault();  
+        setId( new Date().getTime().toString()) ;
+        setTaskArr(
+            [...taskArr,
+                {id:DateId,title:inputVal}
+            ]
+        )
+        dispatch({type:"ADD",payload:{title:inputVal,id:DateId}});
+        setVal("");
+    }
+
+
+    function inputFun(e) {
+        setVal(e.target.value);
+    }
 
     return (
         <>
-            {todos.map((todo)=>(
-                <div key={todo.id}>
-                    <form id="todo-form">
-                        <input
-                        id="todo-input"
-                        type="checkbox"
-                        checked={todo.complete}
-                        onChange={() => handleComplete(todo)}
-                        />
-                        <button type="submit">Button</button>
-                        <button type="reset">Reset</button>
-                        <h1 id="todo-input">{todo.title}</h1>
-
-                    </form>
-                </div>
-            ))}</>
+        <form id="todo-form" onSubmit={submitHandler}>
+            <input id="todo-input" type="textarea" required onChange={inputFun} value={inputVal}/>
+            <button type="submit">submit</button>
+        </form>
+        </>
     )
 }
 
